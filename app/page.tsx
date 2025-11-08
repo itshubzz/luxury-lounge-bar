@@ -1,3 +1,8 @@
+'use client';
+
+import { useLanguage } from "@/components/language-provider";
+import type { LanguageCode } from "@/lib/translations";
+
 const gradientPalette = [
   "linear-gradient(135deg, rgba(10,15,81,0.82) 0%, rgba(40,54,153,0.55) 100%)",
   "linear-gradient(135deg, rgba(200,170,110,0.55) 0%, rgba(94,117,198,0.4) 100%)",
@@ -8,89 +13,13 @@ const gradientPalette = [
 ];
 
 export default function Home() {
-  const menuCategories = [
-    {
-      title: "Breakfast",
-      icon: "🥐",
-      items: [
-        { name: "Chicken Soup", price: "120 den" },
-        { name: "Fried Dough (Llokuma)", price: "130 den" },
-        { name: "Homemade Breakfast", price: "150 den" },
-      ],
-    },
-    {
-      title: "Sandwiches",
-      icon: "🥪",
-      items: [
-        { name: "Pizza Sandwich", price: "150 den" },
-        { name: "Burger", price: "160 den" },
-        { name: "Tuna Sandwich", price: "170 den" },
-        { name: "Steak Sandwich", price: "170 den" },
-        { name: "Special Sandwich", price: "170 den" },
-        { name: "Special Burger", price: "170 den" },
-      ],
-    },
-    {
-      title: "Pizza",
-      icon: "🍕",
-      items: [
-        { name: "Margherita Pizza", price: "180 den" },
-        { name: "Salami Pizza", price: "200 den" },
-        { name: "Ham Pizza", price: "230 den" },
-        { name: "Diavola Pizza", price: "230 den" },
-        { name: "Tuna Pizza", price: "240 den" },
-        { name: "House Pizza", price: "280 den" },
-      ],
-    },
-    {
-      title: "Double Burgers",
-      icon: "🍔",
-      items: [
-        { name: "American Burger", price: "180 den" },
-        { name: "Chicken Burger", price: "200 den" },
-      ],
-    },
-    {
-      title: "Pasta",
-      icon: "🍝",
-      items: [
-        { name: "Tuna Pasta", price: "190 den" },
-        { name: "Steak Pasta", price: "200 den" },
-        { name: "Bolognese Pasta", price: "210 den" },
-      ],
-    },
-    {
-      title: "Grill",
-      icon: "🔥",
-      items: [
-        { name: "Classic Steak", price: "240 den" },
-        { name: "Chicken Fingers", price: "270 den" },
-        { name: "House Steak", price: "290 den" },
-        { name: "Sharri Burger", price: "300 den" },
-      ],
-    },
-    {
-      title: "Salads",
-      icon: "🥗",
-      items: [
-        { name: "Shopska Salad", price: "120 den" },
-        { name: "Greek Salad", price: "120 den" },
-        { name: "Tuna Salad", price: "140 den" },
-        { name: "Caesar Salad", price: "190 den" },
-      ],
-    },
-    {
-      title: "Extras",
-      icon: "🍟",
-      items: [
-        { name: "Ketchup / Mayonnaise", price: "30 den" },
-        { name: "Bread", price: "30 den" },
-        { name: "Baked Cheese (Furnarinë)", price: "80 den" },
-        { name: "French Fries", price: "120 den" },
-        { name: "French Fries with Cheese", price: "150 den" },
-      ],
-    },
-  ];
+  const { language, setLanguage, t } = useLanguage();
+  const { hero, menu, general, placeholders } = t;
+  const menuCategories = menu.categories;
+
+  const handleLanguageSwitch = (code: LanguageCode) => () => {
+    setLanguage(code);
+  };
 
   return (
     <div className="relative isolate min-h-svh overflow-hidden">
@@ -103,30 +32,59 @@ export default function Home() {
 
       <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-20 pt-16 sm:px-10 md:gap-28 md:pt-24">
         <section className="relative flex min-h-[75vh] flex-col items-center justify-center overflow-hidden text-center md:min-h-[80vh]">
+          <nav
+            aria-label="Language selector"
+            className="absolute right-4 top-4 flex items-center gap-2 sm:right-8 sm:top-8"
+          >
+            {[
+              { code: "sq" as LanguageCode, flag: "🇦🇱", label: "Shqip" },
+              { code: "mk" as LanguageCode, flag: "🇲🇰", label: "Македонски" },
+              { code: "en" as LanguageCode, flag: "🇺🇸", label: "English" },
+            ].map(({ code, flag, label }) => {
+              const isActive = language === code;
+              return (
+                <button
+                  key={code}
+                  type="button"
+                  onClick={handleLanguageSwitch(code)}
+                  aria-pressed={isActive}
+                  className={`flex h-10 w-10 items-center justify-center rounded-full border-2 text-lg transition duration-300 ${
+                    isActive
+                      ? "border-white/90 bg-white/15 shadow-[0_0_18px_rgba(255,255,255,0.35)]"
+                      : "border-white/15 bg-white/5 opacity-70 hover:border-white/40 hover:opacity-100"
+                  }`}
+                  title={label}
+                >
+                  <span aria-hidden>{flag}</span>
+                  <span className="sr-only">{label}</span>
+                </button>
+              );
+            })}
+          </nav>
           <div className="absolute -left-16 top-14 hidden h-40 w-40 rounded-full border border-white/10 bg-white/10 blur-2xl sm:block animate-orb" />
           <div className="absolute -right-10 bottom-12 hidden h-56 w-56 rounded-full border border-[#c8aa6e]/20 bg-[#c8aa6e]/15 blur-2xl sm:block animate-orb-delay" />
           <div className="flex flex-col items-center gap-8">
             <span className="animate-fade-up [animation-delay:0.05s] rounded-full border border-white/20 bg-white/5 px-5 py-2 text-xs uppercase tracking-[0.4em] text-white/70">
-              Connect Prime Lounge Bar
+              {hero.badge}
             </span>
             <h1 className="animate-fade-up [animation-delay:0.15s] max-w-3xl text-4xl font-semibold tracking-tight text-white sm:text-5xl md:text-6xl">
-              Experience the Prime Connection.
+              {hero.title}
             </h1>
             <p className="animate-fade-up [animation-delay:0.25s] max-w-2xl text-base text-white/70 sm:text-lg">
-              A luxurious lounge atmosphere in the heart of North Macedonia. Scan the code, explore the menu, and indulge in crafted flavours designed to elevate every moment.
+              {hero.description}
             </p>
             <div className="animate-fade-up [animation-delay:0.35s] flex flex-col items-center gap-4 sm:flex-row">
               <a
                 href="#menu"
                 className="animate-shimmer inline-flex items-center justify-center rounded-full bg-white px-8 py-3 text-sm font-semibold text-[#0a0f51] transition-transform duration-300 hover:-translate-y-0.5 hover:bg-white/90"
               >
-                View Menu
+                {hero.ctaPrimary}
               </a>
               <a
-                href="tel:+38977550054"
+                href={`tel:${general.phoneNumber.replace(/\\s+/g, "")}`}
                 className="inline-flex items-center justify-center rounded-full border border-white/30 bg-white/10 px-8 py-3 text-sm font-semibold text-white transition-colors duration-300 hover:border-white/60 hover:bg-white/15"
               >
-                +389 77 550 054
+                {hero.ctaSecondary}
               </a>
             </div>
           </div>
@@ -135,13 +93,13 @@ export default function Home() {
         <section id="menu" className="space-y-12">
           <header className="flex flex-col items-center gap-4 text-center">
             <p className="text-xs uppercase tracking-[0.5em] text-white/60">
-              Menu
+              {menu.label}
             </p>
             <h2 className="text-3xl font-semibold text-white sm:text-4xl">
-              Curated for the Prime Connection
+              {menu.heading}
             </h2>
             <p className="max-w-2xl text-sm text-white/70 sm:text-base">
-              Explore our crafted selection of breakfast classics, signature sandwiches, elevated pizzas, and lounge favourites prepared with care.
+              {menu.description}
             </p>
           </header>
 
@@ -175,9 +133,9 @@ export default function Home() {
                         }}
                       >
                         <div className="absolute inset-0 flex flex-col items-center justify-center gap-1 bg-black/35 text-[0.6rem] uppercase tracking-[0.35em] text-white/75 transition-opacity duration-500 group-hover:bg-black/20">
-                          <span>Image Placeholder</span>
+                          <span>{placeholders.imageTitle}</span>
                           <span className="text-[0.5rem] tracking-[0.3em] text-white/50">
-                            Replace with dish photo
+                            {placeholders.imageSubtitle}
                           </span>
                         </div>
                       </div>
