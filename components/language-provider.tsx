@@ -23,16 +23,20 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(undefine
 const SUPPORTED_LANGUAGES: LanguageCode[] = ['sq', 'en', 'mk'];
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  const [language, setLanguageState] = useState<LanguageCode>(() => {
+  // Always start with default language to ensure server/client match
+  const [language, setLanguageState] = useState<LanguageCode>(DEFAULT_LANGUAGE);
+
+  // Hydrate from localStorage after mount (client-side only)
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       const stored = window.localStorage.getItem(STORAGE_KEY) as LanguageCode | null;
       if (stored && SUPPORTED_LANGUAGES.includes(stored)) {
-        return stored;
+        setLanguageState(stored);
+      } else {
+        window.localStorage.setItem(STORAGE_KEY, DEFAULT_LANGUAGE);
       }
-      window.localStorage.setItem(STORAGE_KEY, DEFAULT_LANGUAGE);
     }
-    return DEFAULT_LANGUAGE;
-  });
+  }, []);
 
   const setLanguage = useCallback(
     (code: LanguageCode) => {

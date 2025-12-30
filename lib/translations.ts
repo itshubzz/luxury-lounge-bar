@@ -37,7 +37,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       description:
         "Atmosferë luksoze lounge në zemër të Maqedonisë së Veriut. Skanoni kodin, eksploroni menunë dhe shijoni përzgjedhje të kuruara për çdo moment.",
       ctaPrimary: "Shiko Menunë",
-      ctaSecondary: "+389 77 550 054",
+      ctaSecondary: "+3897*******",
     },
     menu: {
       label: "Menu",
@@ -129,7 +129,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       ],
     },
     general: {
-      phoneNumber: "+389 77 550 054",
+      phoneNumber: "+3897*******",
     },
     placeholders: {
       imageTitle: "Vendos Foto",
@@ -143,7 +143,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       description:
         "A luxurious lounge atmosphere in the heart of North Macedonia. Scan the code, explore the menu, and indulge in curated flavours elevating every moment.",
       ctaPrimary: "View Menu",
-      ctaSecondary: "+389 77 550 054",
+      ctaSecondary: "+3897*******",
     },
     menu: {
       label: "Menu",
@@ -235,7 +235,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       ],
     },
     general: {
-      phoneNumber: "+389 77 550 054",
+      phoneNumber: "+3897*******",
     },
     placeholders: {
       imageTitle: "Image Placeholder",
@@ -249,7 +249,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       description:
         "Луксузна лаунџ атмосфера во срцето на Северна Македонија. Скенирајте го кодот, истражете го менито и уживајте во внимателно курирани вкусови за секој момент.",
       ctaPrimary: "Погледни Мени",
-      ctaSecondary: "+389 77 550 054",
+      ctaSecondary: "+3897*******",
     },
     menu: {
       label: "Мени",
@@ -341,7 +341,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
       ],
     },
     general: {
-      phoneNumber: "+389 77 550 054",
+      phoneNumber: "+3897*******",
     },
     placeholders: {
       imageTitle: "Додади Фотографија",
