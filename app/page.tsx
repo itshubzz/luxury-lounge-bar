@@ -1,5 +1,6 @@
 'use client';
 
+import Image from "next/image";
 import { useLanguage } from "@/components/language-provider";
 import type { LanguageCode } from "@/lib/translations";
 
@@ -32,6 +33,16 @@ export default function Home() {
 
       <main className="relative z-10 mx-auto flex w-full max-w-6xl flex-col gap-24 px-6 pb-20 pt-16 sm:px-10 md:gap-28 md:pt-24">
         <section className="relative flex min-h-[75vh] flex-col items-center justify-center overflow-hidden text-center md:min-h-[80vh]">
+          <div className="absolute left-4 top-4 flex items-center sm:left-8 sm:top-8">
+            <Image
+              src="/images/logo.jpg"
+              alt="Connect Prime logo"
+              width={160}
+              height={48}
+              priority
+              className="h-10 w-auto drop-shadow-lg sm:h-12"
+            />
+          </div>
           <nav
             aria-label="Language selector"
             className="absolute right-4 top-4 flex items-center gap-2 sm:right-8 sm:top-8"

@@ -245,7 +245,7 @@ export const translations: Record<LanguageCode, TranslationSchema> = {
   mk: {
     hero: {
       badge: "Connect Prime Lounge Bar",
-      title: "Доживејте ја Премиум Поврзаноста.",
+      title: "Доживејте ја Prime Поврзаноста.",
       description:
         "Луксузна лаунџ атмосфера во срцето на Северна Македонија. Скенирајте го кодот, истражете го менито и уживајте во внимателно курирани вкусови за секој момент.",
       ctaPrimary: "Погледни Мени",
